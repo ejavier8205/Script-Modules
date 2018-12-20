@@ -5,6 +5,7 @@ set HomeDirectory=%~dp0%
  Set "DPath=%1" & Set DPath=!DPath:"=!
 
 :start
+MODE CON:cols=160 lines=100
 title D I R E C T   T H E R M A L   L A B E L   P R I N T   :   A V A I L A B L E   T H E R M A L   L A B E L S
 color f0
 cls
