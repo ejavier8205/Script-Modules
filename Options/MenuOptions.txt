@@ -1,0 +1,3 @@
+1,[  B.C.P.S  ],Baltimore City post-configuration script (2 steps),BCPS-PostConfig\BCPS-POST-CONFIGURATION.bat,1f,Blue/White
+2,[  P.W.C.S  ],Prince William County post-configuration script (2 steps),PWCS-PostConfig\Step One.bat,60,Yellow/Black
+3,[ SCANNER   ],Scan and/or extract MAC Address from computer,SCANS\SCANNER2.bat,8f,Gray/White
