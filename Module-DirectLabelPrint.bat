@@ -64,11 +64,13 @@
         set "DPath=\\storage1\Prod\Quality Assurance\SIGNS AND LABELS\Thermal Labels"
         call "!HomeDirectory!Module-ListDirectory" "!DPath!"
         Set /p LabelTemplate=<"%temp%\SelectedLabel"
+        Set /p SelectedPath=<"%temp%\SelectedPath"
+        set SelectedPath=%SelectedPath:~0,-1%
 
 
 :openTemplate
 
-        ::start "" "C:\Program Files (x86)\Seagull\BarTender Suite\bartend.exe" /min=taskbar /nosplash /F="\\storage1\Prod\Quality Assurance\SIGNS AND LABELS\Thermal Labels\BALTIMORE COUNTY\!LabelTemplate!"
+        start "" "C:\Program Files (x86)\Seagull\BarTender Suite\bartend.exe" /min=taskbar /nosplash /F="!SelectedPath!"
         goto :exitthis
 
 :waitaSec
@@ -265,7 +267,7 @@
 
         Set "ItemMsg= P R I N T E D"
 
-        start "" "C:\Program Files (x86)\Seagull\BarTender Suite\bartend.exe" /F="\\storage1\Prod\Quality Assurance\SIGNS AND LABELS\Thermal Labels\BALTIMORE COUNTY\!LabelTemplate!" /P
+        start "" "C:\Program Files (x86)\Seagull\BarTender Suite\bartend.exe" /F="!SelectedPath!" /P
         
 :CheckPrintJob
 

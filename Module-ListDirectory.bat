@@ -19,10 +19,10 @@ Set "ChooseLabel="
 
  set count=0
 for /f  "tokens=1 delims=" %%A in ('dir "!DPath!" /b /A:D') do ( 
-    set "CFolder=%%A
+    set "CFolder=%%A"
     echo    _______________________________________________________________________
     echo.
-    echo    !CFolder!
+    echo    --!CFolder!--
     echo.
     for /f "tokens=1 delims=" %%a in ('dir "!DPath!\!CFolder!" /b') do (
         set /a count+=1
@@ -50,7 +50,7 @@ if not defined ChooseLabel goto :enterLabel
             
             CHOICE /c YN /m "-                                  I S   T H I S   C O R R E C T"
             if %errorlevel% equ 2 Set "SelectedLabel=" & goto :start
-            if %errorlevel% equ 1 echo !Label!>"%temp%\SelectedLabel" & goto :SelectionCompleted
+            if %errorlevel% equ 1 echo !Label!>"%temp%\SelectedLabel" & echo !DPath!\!CFolder!\!Label!>"%temp%\SelectedPath" & goto :SelectionCompleted
 
 
 
