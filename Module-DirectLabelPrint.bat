@@ -264,9 +264,8 @@
 :startPrinting
 
         Set "ItemMsg= P R I N T E D"
-        echo  SIMULATED PRINT : \\storage1\Prod\Quality Assurance\SIGNS AND LABELS\Thermal Labels\BALTIMORE COUNTY\!LabelTemplate!
-        PAUSE
-        ::start "" "C:\Program Files (x86)\Seagull\BarTender Suite\bartend.exe" /F="\\storage1\Prod\Quality Assurance\SIGNS AND LABELS\Thermal Labels\BALTIMORE COUNTY\!LabelTemplate!" /P
+
+        start "" "C:\Program Files (x86)\Seagull\BarTender Suite\bartend.exe" /F="\\storage1\Prod\Quality Assurance\SIGNS AND LABELS\Thermal Labels\BALTIMORE COUNTY\!LabelTemplate!" /P
         
 :CheckPrintJob
 
