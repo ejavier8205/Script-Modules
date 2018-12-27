@@ -259,11 +259,11 @@
 
 :PrintLabels
 
-        IF /i "!printMode!"  == "SCAN N PRINT" Set "ItemMsg=SAVED" && GOTO :EnterItem
+        IF /i "!printMode!"  == "SCAN N PRINT" Set "ItemMsg= S A V E D" && GOTO :EnterItem
 
 :startPrinting
 
-        Set "ItemMsg=PRINTED"
+        Set "ItemMsg= P R I N T E D"
         echo  SIMULATED PRINT : \\storage1\Prod\Quality Assurance\SIGNS AND LABELS\Thermal Labels\BALTIMORE COUNTY\!LabelTemplate!
         PAUSE
         ::start "" "C:\Program Files (x86)\Seagull\BarTender Suite\bartend.exe" /F="\\storage1\Prod\Quality Assurance\SIGNS AND LABELS\Thermal Labels\BALTIMORE COUNTY\!LabelTemplate!" /P
