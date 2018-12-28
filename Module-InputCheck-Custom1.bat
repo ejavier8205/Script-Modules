@@ -30,12 +30,12 @@
      ::INPUT AUTHENTICATION
             :InputCheck
 
-            echo ValidInput>"%Temp%\ModuleOutput"
+            Set  "InputCheck=ValidInput"
             echo !Input! | Findstr /r "!InputType! ^! ^@ ^~ & ( ) ` - _ + = { } [ ] ; : ' " >nul 2>nul
             
             if %errorlevel% equ 0 (
                 color 8f
-                echo InvalidInput>"%Temp%\ModuleOutput"
+                Set  "InputCheck=InvalidInput"
                 echo.
                 echo !tab2! Invalid entry.
                 timeout /t 2 >nul 2>nul
@@ -43,6 +43,7 @@
     
             for /f "tokens=* delims= " %%a in ("%input%") do set input=%%a
             for /l %%a in (1,1,100) do if "!input:~-1!"==" " set input=!input:~0,-1!
-            echo !input!>"%Temp%\ModuleOutputString"
 
-    EndLocal 
+
+    ::pass variables
+    EndLocal & Set "StringOutput=%input%" & Set "InputStatus=%InputCheck%"

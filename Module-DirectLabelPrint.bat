@@ -152,10 +152,11 @@
                 if not defined ITEM goto :EnterItem 
                 set "Input=!ITEM!"
                 if defined Input call "!InputCheckModule!" "!input!"
-                set /p Result=<"%temp%\ModuleOutput"
-                if ["!Result!"] == ["InvalidInput"] goto :EnterItem
+                echo !InputStatus!
+                pause
+                if ["!InputStatus!"] == ["InvalidInput"] goto :EnterItem
                 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-                set /p ITEM=<"%temp%\ModuleOutputString"
+                set "ITEM=!StringOutput!" 
 ::CHECK IF USER FOLDER EXIST IN SCANS FOLDER
 
                 If /I "!ITEM!" == "D" (
