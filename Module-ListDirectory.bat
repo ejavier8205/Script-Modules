@@ -64,12 +64,12 @@ goto :SelectThermalLabel
 
 :SelectionCompleted
 
-
+::echo !Label!>"%temp%\SelectedLabel"
 Set "SelectedTemplate=!Label!"
 Set "SelectedFile=!DPath!\!CFolder!\!Label!"
 
 ::Pass variables
-endlocal & Set "SelectedLabel=%SelectedFile%" & Set "LabelTemplate=%Label%" 
+endlocal & Set "SelectedLabel=%SelectedFile%" & Set "LabelTemplate=%SelectedTemplate%" 
 
 
 

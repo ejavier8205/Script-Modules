@@ -33,7 +33,6 @@
         setlocal EnableDelayedExpansion
         ECHO SET UAC = CreateObject^("Shell.Application"^) > "%temp%\UAC.vbs"
         ECHO UAC.ShellExecute "!batchPath!", "ELEV", "", "runas", 1 >> "%temp%\UAC.vbs"
-        
 :ChangeLabel
 
         taskkill /im "bartend.exe" >NUL 2>NUL
@@ -53,7 +52,6 @@
 :openTemplate
 
         start "" "C:\Program Files (x86)\Seagull\BarTender Suite\bartend.exe" /min=taskbar /nosplash /F="!SelectedLabel!"
-        goto :exitthis
 
 :waitaSec
 
@@ -66,7 +64,7 @@
        
 :FindInTaskBar
          
-        "!HomeDirectory!cmdow" /t | Findstr /i "Bartender" >nul 2>nul && goto exitthis || goto waitaSec
+        "!HomeDirectory!cmdow" /t | Findstr /i "Bartender" >nul 2>nul && goto :gotPrivileges || goto :waitaSec
         :exitthis
         timeout /t 2 >nul 2>nul
         "%temp%\UAC.vbs"
@@ -88,7 +86,7 @@
         Set "ScanFile=Serials.txt"
         Set "ScanDir=C:\Apex"
         Set "Scan=!ScanDir!\!ScanFile!"
-        set /p LabelTemplate=<"%temp%\SelectedLabel"
+
 
         If not defined printMode (
                 goto :ChooseMode
@@ -152,8 +150,6 @@
                 if not defined ITEM goto :EnterItem 
                 set "Input=!ITEM!"
                 if defined Input call "!InputCheckModule!" "!input!"
-                echo !InputStatus!
-                pause
                 if ["!InputStatus!"] == ["InvalidInput"] goto :EnterItem
                 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
                 set "ITEM=!StringOutput!" 
