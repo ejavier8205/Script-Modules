@@ -113,13 +113,14 @@
 
 :EnterItem
 
-        color 5f
+        
         title  D I R E C T   T H E R M A L   L A B E L   P R I N T   :   S T A R T   S C A N N I N G
         cls
 
         type "%temp%\ScannedSerials.txt" | find "" /v /c >"%Temp%\ModuleOutputString"
         Set /p ItemsCount=<"%Temp%\ModuleOutputString"
-
+        if !ItemsCount! gtr 0 color 5f
+        if !ItemsCount! equ 0 color 8f
         echo.
         echo            L A B E L:      !LabelTemplate!
         echo.
@@ -127,7 +128,7 @@
         echo. & echo. & echo.
         echo    _________________________________________________________________________________________________________________________________________________
         echo.
-        echo    [ C ] CHANGE LABEL     -     [ V ] VIEW SCAN     -     [ P ] PRINT ALL (!ItemsCount!)     -     [ M ] PRINT MODE     -     [ D ] DELETE DATA        
+        echo    [ C ] CHANGE LABEL     -     [ V ] VIEW SCAN     -     [ P ] PRINT ALL (!ItemsCount!)     -     [ M ] CHANGE PRINT MODE     -     [ D ] DELETE DATA        
         echo    _________________________________________________________________________________________________________________________________________________
         
         If /I "!ITEM!" == "C" Set "ITEM="
@@ -138,7 +139,8 @@
         
         if defined ITEM echo. & echo. & echo.
         if defined ITEM echo            L A S T   !ItemMsg!   I T E M:   !ITEM!
-        
+        echo. & echo. & echo.
+        IF /i "!printMode!"  == "DIRECT PRINT" echo             * BEFORE PRINTING: Make sure the thermal printer is not currently busy with other print jobs.
         echo. & echo. & echo.
         
         Set "ITEM="
