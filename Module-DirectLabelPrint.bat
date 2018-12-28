@@ -46,31 +46,13 @@
         echo. & echo. & echo.
 
         
-        if not exist "%temp%\SelectedLabel" goto :listTemplates
-        if exist "%temp%\SelectedLabel" goto :CheckCurrentTemplate
-
-                :CheckCurrentTemplate
-                if /i "!ITEM!" == "C" goto :listTemplates
-                Set /p LabelTemplate=<"%temp%\SelectedLabel"
-
-                echo                            C O N T I N U E   U S I N G :   !LabelTemplate!   [ Y / N ]
-                Choice /c YN /n 
-                        If %errorlevel% equ 2 Goto :listTemplates
-                        If %errorlevel% equ 1 Goto :openTemplate
-                
-
-:listTemplates
-
         set "DPath=\\storage1\Prod\Quality Assurance\SIGNS AND LABELS\Thermal Labels"
         call "!HomeDirectory!Module-ListDirectory" "!DPath!"
-        Set /p LabelTemplate=<"%temp%\SelectedLabel"
-        Set /p SelectedPath=<"%temp%\SelectedPath"
-        set SelectedPath=%SelectedPath:~0,-1%
 
 
 :openTemplate
 
-        start "" "C:\Program Files (x86)\Seagull\BarTender Suite\bartend.exe" /min=taskbar /nosplash /F="!SelectedPath!"
+        start "" "C:\Program Files (x86)\Seagull\BarTender Suite\bartend.exe" /min=taskbar /nosplash /F="!SelectedLabel!"
         goto :exitthis
 
 :waitaSec
@@ -267,7 +249,7 @@
 
         Set "ItemMsg= P R I N T E D"
 
-        start "" "C:\Program Files (x86)\Seagull\BarTender Suite\bartend.exe" /F="!SelectedPath!" /P
+        start "" "C:\Program Files (x86)\Seagull\BarTender Suite\bartend.exe" /F="!SelectedLabel!" /P
         
 :CheckPrintJob
 

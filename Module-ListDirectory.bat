@@ -1,8 +1,12 @@
 @echo off
+cls
 SetLocal EnableDelayedExpansion
 set HomeDirectory=%~dp0%
 
- Set "DPath=%1" & Set DPath=!DPath:"=!
+ Set "DPath=%1"
+
+if defined DPath Set DPath=!DPath:"=!
+if not defined DPath echo   Passed directory is missing, script cannot continue & pause>nul 2>nul & exit
 
 :start
 MODE CON:cols=160 lines=100
@@ -22,7 +26,7 @@ for /f  "tokens=1 delims=" %%A in ('dir "!DPath!" /b /A:D') do (
     set "CFolder=%%A"
     echo    _______________________________________________________________________
     echo.
-    echo    --!CFolder!--
+    echo    !CFolder!
     echo.
     for /f "tokens=1 delims=" %%a in ('dir "!DPath!\!CFolder!" /b') do (
         set /a count+=1
@@ -50,7 +54,7 @@ if not defined ChooseLabel goto :enterLabel
             
             CHOICE /c YN /m "-                                  I S   T H I S   C O R R E C T"
             if %errorlevel% equ 2 Set "SelectedLabel=" & goto :start
-            if %errorlevel% equ 1 echo !Label!>"%temp%\SelectedLabel" & echo !DPath!\!CFolder!\!Label!>"%temp%\SelectedPath" & goto :SelectionCompleted
+            if %errorlevel% equ 1 goto :SelectionCompleted
 
 
 
@@ -59,7 +63,13 @@ set /p "ChooseLabel=-      S E L E C T   A   L A B E L : "
 goto :SelectThermalLabel
 
 :SelectionCompleted
-endlocal 
+
+
+Set "SelectedTemplate=!Label!"
+Set "SelectedFile=!DPath!\!CFolder!\!Label!"
+
+::Pass variables
+endlocal & Set "SelectedLabel=%SelectedFile%" & Set "LabelTemplate=%Label%" 
 
 
 
